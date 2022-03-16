@@ -82,8 +82,40 @@ router.get('/order-page', async function(req, res, next) {
 });
 
 /* GET chart page. */
-router.get('/charts', function(req, res, next) {
-  res.render('charts');
+router.get('/charts', async function(req, res, next) {
+
+var aggregate = userModel.aggregate();
+aggregate.group({ _id: "$gender", userCount: { $sum: 1 } });
+var data = await aggregate.exec();
+
+var user = await userModel.find();
+var read = 0;
+var unread = 0;
+
+for (var i=0; i<user.length; i++) {
+  for (var y=0; y<user[i].messages.length; y++) {
+    if (user[i].messages[y].read == true) {
+      read = read + 1;
+    } else {
+      unread = unread + 1;
+    }
+  }
+}
+
+var orderpaid_ship = orderModel.aggregate();
+orderpaid_ship.match({"status_payment": "validated"})
+orderpaid_ship.group({ _id: "$status_shipment", userCount: { $sum: 1 } });
+var data_order = await orderpaid_ship.exec();
+
+var ca = orderModel.aggregate();
+ca.match({"status_payment": "validated"})
+ca.group({ _id: {inscriptionYear: { $year: '$date_payment' },inscriptionMonth: { $month: '$date_payment' }}, chiffreAffaire: {$sum: "$total"} });
+var chiffreAffaire = await ca.exec();
+
+console.log(chiffreAffaire);
+
+  res.render('charts', {data, read, unread, data_order, chiffreAffaire});
+
 });
 
 

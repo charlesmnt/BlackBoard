@@ -397,3 +397,16 @@ body.sidebar-toggled footer.sticky-footer {
   color:#d6d8db;
   text-align: center;
 }
+
+.graphique {
+  display : flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border : black solid 1px;
+}
+
+.graph {
+  border : red solid 1px;
+}
+

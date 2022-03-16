@@ -36,27 +36,27 @@
 
       <div id="content-wrapper">
 
-        <div class="container-fluid">
+        <div class="container-fluid graph">
 
 
 
-          <div class="row">
+          <div class="row graphique col-4">
 
-            <div class="col-12 col-md-4 mb-3 chart">
-              <img class="img-fluid" src="/images/chart1.jpg">
-            </div>
+            <canvas id="myChart" data-count1="<%=data[0].userCount%>" data-count2="<%=data[1].userCount%>">
+             
+            </canvas>
 
-            <div class="col-12 col-md-4 mb-3 chart">
-              <img class="img-fluid" src="/images/chart2.jpg">
-            </div>
+            <canvas id="myMail" data-read="<%=read%>" data-unread="<%=unread%>">
+             
+            </canvas>
 
-            <div class="col-12 col-md-4 mb-3 chart">
-              <img class="img-fluid" src="/images/chart3.jpg">
-            </div>
+            <canvas id="order" data-ship="<%=data_order[0].userCount%>" data-unship="<%=data_order[1].userCount%>">
+             
+            </canvas>
 
-            <div class="col-12 col-md-4 mb-3 chart">
-              <img class="img-fluid" src="/images/chart4.jpg">
-            </div>
+            <canvas id="ca" data-chiffreAffaire="<%=chiffreAffaire%>">
+             
+            </canvas>
             
           </div>
 
@@ -92,6 +92,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js "></script>
+    <script src="../js/datavis.js"></script>
 
   </body>
 
